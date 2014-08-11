@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+$support-for-ie6: false !default;
+
+// $border-width:border width; $border-color: border color;
+// $tag:child element; $tag-padding:child element padding; $current-color:current element border-bottom color
+@mixin tabstrip($border-width:1, $border-color:#aaa, $tag:a, $tag-padding:5px 10px, $current-color:#fff){
+	&{
+		border-bottom:#{$border-width}px $border-color solid;
+		font-size:0;letter-spacing:-4px;
+		#{$tag}{
+			display: inline-block;
+			border:#{$border-width}px $border-color solid;
+			padding:$tag-padding;
+			margin:{
+				bottom:-#{$border-width}px;
+				left:5px;
+				right:5px;
+			}
+			font-size:14px;letter-spacing:0;
+			@if $support-for-ie6{
+				position:relative;
+				vertical-align:baseline;
+			}
+			&:hover, &.current{
+				border-bottom-color:$current-color;
+			}
+		}
+	}
+}
+
+/*=================Use=======================
+.demo {
+  @include tabstrip;
+}
+
+=====================html=====================
+<div class="demo">
+    <a href="#">分类一</a>
+    <a href="#" class="current">分类二</a>
+    <a href="#">分类三</a>
+    <a href="#">分类四</a>
+</div>
+
+=====================output===================
+//$support-for-ie6: false;
+.demo {
+  border-bottom: 1px #aaaaaa solid;
+  font-size: 0;
+  letter-spacing: -4px;
+}
+.demo a {
+  display: inline-block;
+  border: 1px #aaaaaa solid;
+  padding: 5px 10px;
+  margin-bottom: -1px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+.demo a:hover, .demo a.current {
+  border-bottom-color: white;
+}
+
+//$support-for-ie6: true;
+.demo {
+  border-bottom: 1px #aaaaaa solid;
+  font-size: 0;
+  letter-spacing: -4px;
+}
+.demo a {
+  display: inline-block;
+  border: 1px #aaaaaa solid;
+  padding: 5px 10px;
+  margin-bottom: -1px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+  letter-spacing: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.demo a:hover, .demo a.current {
+  border-bottom-color: white;
+}
+============================================*/
